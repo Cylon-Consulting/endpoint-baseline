@@ -1,15 +1,15 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "updated": "2026-06-10",
-  "notes": "Initial efficiency baseline. Copilot left enabled per decision 2026-06-10; fast startup disabled.",
+  "notes": "Auto-update after payload change (4fce4e09d2986fb15aa16eb78b928c515812bd9c)",
   "payload": {
     "description": "Efficiency baseline script, pinned to commit",
-    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/c56b959096d65de6de4f5d3f4914770efcfb97ff/payload/Invoke-EfficiencyBaseline.ps1",
-    "sha256": "5436f022e8e6b712aa9bc685add129ec91f89765da0b084d3ab90c6a62a95380"
+    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/4fce4e09d2986fb15aa16eb78b928c515812bd9c/payload/Invoke-EfficiencyBaseline.ps1",
+    "sha256": "5cf7f7c5544c84d938b2e65a61623f7cd1cfdebc7ab1f0d510503415bc12b1ff"
   },
   "config": {
     "description": "Payload toggles + appx removal list, pinned to commit",
-    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/c56b959096d65de6de4f5d3f4914770efcfb97ff/payload/efficiency-config.json",
+    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/4fce4e09d2986fb15aa16eb78b928c515812bd9c/payload/efficiency-config.json",
     "sha256": "4fe6b0bd3699031b606892644b2566042120b090934305058ef6564589d0190e"
   },
   "arguments": "-ConfigPath {config}"
