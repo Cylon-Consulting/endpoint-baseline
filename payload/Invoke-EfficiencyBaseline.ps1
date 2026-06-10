@@ -162,9 +162,15 @@ if ($cfg.svchostConsolidation) {
     }
 }
 if ($cfg.storageSense) {
-    Invoke-Step 'Storage Sense on (weekly)' {
+    Invoke-Step 'Storage Sense on (weekly; temp files only)' {
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' AllowStorageSenseGlobal 1
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' ConfigStorageSenseGlobalCadence 7
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' AllowStorageSenseTemporaryFilesCleanup 1
+        # 0 = never: Storage Sense must NOT dehydrate OneDrive Files
+        # On-Demand content or delete anything from users' Downloads.
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' ConfigStorageSenseCloudContentDehydrationThreshold 0
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' ConfigStorageSenseDownloadsCleanupThreshold 0
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense' ConfigStorageSenseRecycleBinCleanupThreshold 30
     }
 }
 if ($cfg.disableCEIPTasks) {

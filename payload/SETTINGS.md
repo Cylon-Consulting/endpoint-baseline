@@ -23,7 +23,7 @@ researched additions; see git history for change control.
 | Widgets/news feed off (`disableWidgets`) | `Policies\Dsh → AllowNewsAndInterests=0` | Kills the persistent `webexperience` background process and its content pulls |
 | DiagTrack service disabled (`disableDiagTrack`) | `Stop-Service` + startup type Disabled | The main telemetry collector/uploader process |
 | svchost consolidation (`svchostConsolidation`) | `SvcHostSplitThresholdInKB` = installed RAM | Merges service host processes — fewer processes, ~50–150MB less overhead |
-| Storage Sense on, weekly (`storageSense`) | `Policies\StorageSense → AllowStorageSenseGlobal=1, Cadence=7` | Disks self-clean between runs — near-full SSDs are a real slowness cause |
+| Storage Sense on, weekly, temp-files-only (`storageSense`) | `Policies\StorageSense → AllowStorageSenseGlobal=1, Cadence=7, TemporaryFilesCleanup=1, CloudContentDehydrationThreshold=0, DownloadsCleanupThreshold=0, RecycleBinCleanupThreshold=30` | Disks self-clean between runs. Dehydration and Downloads thresholds pinned to 0 (never): Storage Sense must not turn OneDrive files online-only or delete from users' Downloads |
 | CEIP scheduled tasks off (`disableCEIPTasks`) | Disables: Microsoft Compatibility Appraiser, ProgramDataUpdater, Consolidator, UsbCeip | CompatTelRunner.exe is a documented cause of idle CPU/disk spikes; AllowTelemetry=0 alone does not stop these tasks |
 | Recall off (`disableRecall`) | `Policies\WindowsAI → DisableAIDataAnalysis=1` | Stops continuous screen-snapshotting on Copilot+ hardware; privacy |
 | Game DVR off (`disableGameDVR`) | `Policies\GameDVR → AllowGameDVR=0` | Disables Xbox background screen-recording — unused on business machines |

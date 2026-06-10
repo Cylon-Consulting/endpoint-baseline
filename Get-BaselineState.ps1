@@ -35,6 +35,10 @@ $checks = @(
     @{Area='Machine'; Label='Widgets / news feed';        Path='HKLM:\SOFTWARE\Policies\Microsoft\Dsh'; Name='AllowNewsAndInterests'; Expected=0}
     @{Area='Machine'; Label='Storage Sense allowed';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='AllowStorageSenseGlobal'; Expected=1}
     @{Area='Machine'; Label='Storage Sense cadence';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='ConfigStorageSenseGlobalCadence'; Expected=7}
+    @{Area='Machine'; Label='Storage Sense temp cleanup'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='AllowStorageSenseTemporaryFilesCleanup'; Expected=1}
+    @{Area='Machine'; Label='OneDrive dehydration (0=never)'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='ConfigStorageSenseCloudContentDehydrationThreshold'; Expected=0}
+    @{Area='Machine'; Label='Downloads cleanup (0=never)'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='ConfigStorageSenseDownloadsCleanupThreshold'; Expected=0}
+    @{Area='Machine'; Label='Recycle Bin cleanup days';   Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='ConfigStorageSenseRecycleBinCleanupThreshold'; Expected=30}
     @{Area='Machine'; Label='Recall / AI data analysis';  Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI'; Name='DisableAIDataAnalysis'; Expected=1}
     @{Area='Machine'; Label='Game DVR policy';            Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR'; Name='AllowGameDVR'; Expected=0}
     @{Area='Machine'; Label='Edge background mode';       Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='BackgroundModeEnabled'; Expected=0}
