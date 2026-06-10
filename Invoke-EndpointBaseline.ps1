@@ -25,7 +25,7 @@
 #>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)] [string]$ManifestUrl,
+    [string]$ManifestUrl = 'https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/main/manifest.json',
     [string]$AuthToken,
     [string]$WorkDir = (Join-Path $env:ProgramData 'EndpointBaseline'),
     [string]$LogDir  = (Join-Path $env:ProgramData 'EndpointBaseline\logs')
