@@ -1,0 +1,6 @@
+<Configuration>
+  <Networking>Enable</Networking>
+  <LogonCommand>
+    <Command>powershell -ExecutionPolicy Bypass -NoExit -Command "irm https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/main/testing/Invoke-SandboxSmoke.ps1 -OutFile C:\smoke.ps1; powershell -ExecutionPolicy Bypass -File C:\smoke.ps1"</Command>
+  </LogonCommand>
+</Configuration>
