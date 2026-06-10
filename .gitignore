@@ -1,0 +1,6 @@
+# Never commit machine-generated reports or transcripts - they can contain
+# hostnames/usernames, and this is a public repo.
+drift-report.txt
+last-report.txt
+*.log
+logs/

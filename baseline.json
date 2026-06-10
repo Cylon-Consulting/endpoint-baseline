@@ -1,0 +1,35 @@
+{
+  "version": "2026-06-10",
+  "winutilBranch": "26.05.12",
+  "presetName": "Standard",
+  "approvedPreset": [
+    "WPFTweaksActivity",
+    "WPFTweaksConsumerFeatures",
+    "WPFTweaksDisableExplorerAutoDiscovery",
+    "WPFTweaksWPBT",
+    "WPFTweaksDeBloat",
+    "WPFTweaksLocation",
+    "WPFTweaksServices",
+    "WPFTweaksTelemetry",
+    "WPFTweaksDiskCleanup",
+    "WPFTweaksDeleteTempFiles",
+    "WPFTweaksEndTaskOnTaskbar",
+    "WPFTweaksRestorePoint",
+    "WPFTweaksPowershell7Tele"
+  ],
+  "tweakHashes": {
+    "WPFTweaksActivity": "b132d0a3ba7c07dc4e632ccff33d45e857ff953d46ea0f8f72d8e5447990f785",
+    "WPFTweaksConsumerFeatures": "bb31016c0c560cb31931b7768f93064d4340455fdccb3ed89f402225f42d1cc6",
+    "WPFTweaksDeBloat": "b9da11eec5a3a17ef2d47e8d581f888c0f55650afb36037cb6ced41e5c195fa4",
+    "WPFTweaksDeleteTempFiles": "3a85d137e1f9fdc57f07cfa8603297404be31e48b6245156852b4306d2e7aad1",
+    "WPFTweaksDisableExplorerAutoDiscovery": "87f61b5bd98ef97e40cf84274598ba8628a4e92412ca18ec1f65ff275c613835",
+    "WPFTweaksDiskCleanup": "2a917b4626f5b081ae9f61e99666e55a1112d3f06903be7de39cc0773e8f0652",
+    "WPFTweaksEndTaskOnTaskbar": "459eab299b31f472bb5ee22d068c4f97268374cb3040c40653212fe7fb1b86da",
+    "WPFTweaksLocation": "9e595f486be539eb200193058f2cda264fd28fff8704b9f2414914571e624ff3",
+    "WPFTweaksPowershell7Tele": "860dfd084bba8b75d08128048b2678bb1d3e6f62cc60813f7656d7f7190db29d",
+    "WPFTweaksRestorePoint": "bc2e475d815f32d198b51f041301afcb9f82a2a9e9813f759791346195151956",
+    "WPFTweaksServices": "86da8e1d1591150c926637ef4def209fcfb2ba32fe874a2ad64b2a2dcc84fb7a",
+    "WPFTweaksTelemetry": "ca3688e431e5ecd66eba4e4d3cf2d44bab6d4fc9b77e04a4b5340038d5ca4dd4",
+    "WPFTweaksWPBT": "fa5b9975cfafe8aeba4127a9a81fed807b1cc82c02e698690ded8e7a84772d24"
+  }
+}

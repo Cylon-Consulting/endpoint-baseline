@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-06-10",
+  "notes": "Essential Tweaks baseline per screenshot 2026-06-10. DeliveryOptimization pending review; Powershell7Tele removed upstream.",
+  "payload": {
+    "description": "Efficiency baseline script - pin to a commit SHA in your repo, never a branch",
+    "url": "https://raw.githubusercontent.com/<YOUR_ORG>/winutil-baseline/<COMMIT_SHA>/payload/Invoke-EfficiencyBaseline.ps1",
+    "sha256": "<SHA256_OF_PAYLOAD_PS1>"
+  },
+  "config": {
+    "description": "Toggles + appx removal list consumed by the payload; edit this to change fleet behavior",
+    "url": "https://raw.githubusercontent.com/<YOUR_ORG>/winutil-baseline/<COMMIT_SHA>/payload/efficiency-config.json",
+    "sha256": "<SHA256_OF_CONFIG_JSON>"
+  },
+  "arguments": "-ConfigPath {config}"
+}
