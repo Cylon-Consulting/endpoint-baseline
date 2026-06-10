@@ -71,7 +71,8 @@ function Set-Reg {
 function Invoke-PerUserHive {
     param([scriptblock]$Apply)
     $profileList = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList'
-    $profiles = Get-ChildItem $profileList | Where-Object { $_.PSChildName -match '^S-1-5-21-' }
+    # S-1-5-21-* = local/domain accounts; S-1-12-1-* = Entra ID accounts
+    $profiles = Get-ChildItem $profileList | Where-Object { $_.PSChildName -match '^S-1-(5-21|12-1)-' }
     foreach ($p in $profiles) {
         $sid  = $p.PSChildName
         $path = (Get-ItemProperty $p.PSPath).ProfileImagePath
