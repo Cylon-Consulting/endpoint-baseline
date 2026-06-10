@@ -27,8 +27,8 @@
 param(
     [Parameter(Mandatory)] [string]$ManifestUrl,
     [string]$AuthToken,
-    [string]$WorkDir = (Join-Path $env:ProgramData 'WinutilBaseline'),
-    [string]$LogDir  = (Join-Path $env:ProgramData 'WinutilBaseline\logs')
+    [string]$WorkDir = (Join-Path $env:ProgramData 'EndpointBaseline'),
+    [string]$LogDir  = (Join-Path $env:ProgramData 'EndpointBaseline\logs')
 )
 
 $ErrorActionPreference = 'Stop'
