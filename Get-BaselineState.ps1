@@ -39,7 +39,7 @@ $checks = @(
     @{Area='Machine'; Label='Game DVR policy';            Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR'; Name='AllowGameDVR'; Expected=0}
     @{Area='Machine'; Label='Edge background mode';       Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='BackgroundModeEnabled'; Expected=0}
     @{Area='Machine'; Label='Fast startup (hiberboot)';   Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power'; Name='HiberbootEnabled'; Expected=0}
-    @{Area='Machine'; Label='svchost split threshold';    Path='HKLM:\SYSTEM\CurrentControlSet\Control'; Name='SvcHostSplitThresholdInKB'; Expected='(installed RAM in KB)'}
+    @{Area='Machine'; Label='svchost split threshold';    Path='HKLM:\SYSTEM\CurrentControlSet\Control'; Name='SvcHostSplitThresholdInKB'; Expected=[uint32]((Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum / 1KB)}
     # --- Current user ---
     @{Area='User'; Label='Advertising ID';                Path='HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo'; Name='Enabled'; Expected=0}
     @{Area='User'; Label='Tailored experiences';          Path='HKCU:\Software\Microsoft\Windows\CurrentVersion\Privacy'; Name='TailoredExperiencesWithDiagnosticDataEnabled'; Expected=0}
