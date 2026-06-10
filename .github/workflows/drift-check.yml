@@ -10,6 +10,10 @@ on:
         description: 'Approve current upstream as the new baseline (commits baseline.json)'
         type: boolean
         default: false
+      approve_watches:
+        description: 'Mark all upstream watches as reviewed (commits watchlist.json)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -48,6 +52,37 @@ jobs:
               --label winutil-drift --body-file drift-report.txt
           fi
 
+      - name: Approve upstream watches (manual)
+        if: ${{ inputs.approve_watches }}
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./Check-UpstreamWatches.ps1 -UpdateWatchlist
+
+      - name: Upstream watches check
+        id: watches
+        if: ${{ !inputs.approve_watches }}
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & ./Check-UpstreamWatches.ps1 -ReportPath ./watch-report.txt
+          "code=$LASTEXITCODE" >> $env:GITHUB_OUTPUT
+          exit 0
+
+      - name: Open or update upstream watch issue
+        if: ${{ !inputs.approve_watches && steps.watches.outputs.code == '1' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing=$(gh issue list --label upstream-watch --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file watch-report.txt
+          else
+            gh issue create --title "Upstream changes to review $(date -u +%F)" \
+              --label upstream-watch --body-file watch-report.txt
+          fi
+
       # Counts as repo activity, so GitHub never disables this scheduled
       # workflow for inactivity (60-day rule on public repos). Also commits
       # baseline.json after an update_baseline run.
@@ -58,6 +93,7 @@ jobs:
           date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last-checked
           git add .github/last-checked
           [ -f baseline.json ] && git add baseline.json
+          [ -f watchlist.json ] && git add watchlist.json
           git commit -m "chore: drift check $(date -u +%F) [skip ci]" || echo "nothing to commit"
           git push
 

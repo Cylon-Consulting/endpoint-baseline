@@ -1,0 +1,24 @@
+name: Update manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'payload/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate manifest
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ./Update-Manifest.ps1 -Notes "Auto-update after payload change (${{ github.sha }})" -Commit -Push

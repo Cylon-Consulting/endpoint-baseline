@@ -1,0 +1,32 @@
+{
+  "watches": [
+    {
+      "name": "Win11Debloat app removal list",
+      "repo": "Raphire/Win11Debloat",
+      "branch": "master",
+      "path": "Config/Apps.json",
+      "lastReviewed": "db2486505167e6295dd198e0f5039b28948e077d"
+    },
+    {
+      "name": "Win11Debloat registry tweaks",
+      "repo": "Raphire/Win11Debloat",
+      "branch": "master",
+      "path": "Regfiles",
+      "lastReviewed": "1d828d6a78a4a046c09a1d36db84fb547dc4e5bf"
+    },
+    {
+      "name": "Win11Debloat recommended defaults",
+      "repo": "Raphire/Win11Debloat",
+      "branch": "master",
+      "path": "Config/DefaultSettings.json",
+      "lastReviewed": "bb31e98df773157a60957d70c1e8d30404f4f0ad"
+    },
+    {
+      "name": "Microsoft VDOT optimization tool",
+      "repo": "The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool",
+      "branch": "main",
+      "path": "",
+      "lastReviewed": "c93dfb2db35a16584efebb27a626a2f51c503c54"
+    }
+  ]
+}
