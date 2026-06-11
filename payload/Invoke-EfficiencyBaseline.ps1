@@ -269,12 +269,9 @@ if ($cfg.telemetryPerUser -or $cfg.endTaskOnTaskbar -or $cfg.explorerAutoDiscove
 if ($cfg.removeAppx -and $cfg.removeAppx.Count -gt 0) {
     Invoke-Step "Remove appx packages ($($cfg.removeAppx.Count) in list)" {
         foreach ($name in $cfg.removeAppx) {
-            $pkgs = Get-AppxPackage -AllUsers -Name $name -ErrorAction SilentlyContinue
-            foreach ($pkg in $pkgs) {
-                try { Remove-AppxPackage -Package $pkg.PackageFullName -AllUsers -ErrorAction Stop
-                      Write-Host "   removed $($pkg.Name)" }
-                catch { Write-Warning "   could not remove $($pkg.Name): $($_.Exception.Message)" }
-            }
+            # Deprovision FIRST: with the provisioned copy gone, per-user
+            # removal de-stages cleanly. The reverse order hits 0x80070002
+            # DeStage failures under SYSTEM on Win10.
             Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue |
                 Where-Object { $_.DisplayName -eq $name } |
                 ForEach-Object {
@@ -282,6 +279,12 @@ if ($cfg.removeAppx -and $cfg.removeAppx.Count -gt 0) {
                           Write-Host "   deprovisioned $name" }
                     catch { Write-Warning "   could not deprovision ${name}: $($_.Exception.Message)" }
                 }
+            $pkgs = Get-AppxPackage -AllUsers -Name $name -ErrorAction SilentlyContinue
+            foreach ($pkg in $pkgs) {
+                try { Remove-AppxPackage -Package $pkg.PackageFullName -AllUsers -ErrorAction Stop
+                      Write-Host "   removed $($pkg.Name)" }
+                catch { Write-Warning "   could not remove $($pkg.Name): $($_.Exception.Message)" }
+            }
         }
     }
 }
