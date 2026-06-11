@@ -34,6 +34,7 @@ $machineChecks = @(
     @{Area='Machine'; Label='Consumer features';          Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent'; Name='DisableWindowsConsumerFeatures'; Expected=1}
     @{Area='Machine'; Label='WPBT execution';             Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager'; Name='DisableWpbtExecution'; Expected=1}
     @{Area='Machine'; Label='Widgets / news feed';        Path='HKLM:\SOFTWARE\Policies\Microsoft\Dsh'; Name='AllowNewsAndInterests'; Expected=0}
+    @{Area='Machine'; Label='News feed Win10 (EnableFeeds)'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds'; Name='EnableFeeds'; Expected=0}
     @{Area='Machine'; Label='Storage Sense allowed';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='AllowStorageSenseGlobal'; Expected=1}
     @{Area='Machine'; Label='Storage Sense cadence';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='ConfigStorageSenseGlobalCadence'; Expected=7}
     @{Area='Machine'; Label='Storage Sense temp cleanup'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='AllowStorageSenseTemporaryFilesCleanup'; Expected=1}

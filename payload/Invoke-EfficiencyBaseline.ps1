@@ -146,7 +146,10 @@ if ($cfg.powershell7Telemetry) {
 }
 if ($cfg.disableWidgets) {
     Invoke-Step 'Widgets / news feed off' {
+        # Win11 widgets board
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Dsh' AllowNewsAndInterests 0
+        # Win10 'News and Interests' taskbar feed (inert on Win11)
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds' EnableFeeds 0
     }
 }
 if ($cfg.disableDiagTrack) {
