@@ -22,6 +22,15 @@ param(
 )
 
 $ErrorActionPreference = 'SilentlyContinue'
+
+# Workstations only - on a server the baseline does not apply, so report
+# nothing rather than a wall of meaningless DIFFs (and don't alert).
+$productType = (Get-CimInstance Win32_OperatingSystem).ProductType
+if ($productType -ne 1) {
+    Write-Host "Server OS detected (ProductType $productType) - workstation-only baseline, audit not applicable. Exiting 0."
+    exit 0
+}
+
 if (-not $OutFile) {
     $OutFile = Join-Path $env:TEMP ("baseline-state-{0}-{1:yyyyMMdd-HHmm}.json" -f $env:COMPUTERNAME, (Get-Date))
 }

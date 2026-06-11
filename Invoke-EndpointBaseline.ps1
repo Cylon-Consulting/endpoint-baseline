@@ -34,6 +34,13 @@ param(
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
+# Workstations only - never run the desktop baseline on a server.
+$productType = (Get-CimInstance Win32_OperatingSystem).ProductType
+if ($productType -ne 1) {
+    Write-Host "Server OS detected (ProductType $productType) - endpoint baseline is workstation-only. Skipping, nothing executed."
+    exit 0
+}
+
 foreach ($d in @($WorkDir, $LogDir)) {
     if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }
 }

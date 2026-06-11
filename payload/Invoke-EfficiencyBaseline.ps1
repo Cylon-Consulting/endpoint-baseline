@@ -33,6 +33,14 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+# Workstations only - defense in depth in case the payload is invoked
+# directly on a server (the launcher has the same guard).
+$productType = (Get-CimInstance Win32_OperatingSystem).ProductType
+if ($productType -ne 1) {
+    Write-Host "Server OS detected (ProductType $productType) - workstation-only baseline. Skipping."
+    exit 0
+}
+
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
         ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Error 'Must run elevated.'
