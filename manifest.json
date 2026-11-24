@@ -1,16 +1,16 @@
 {
-  "version": "1.0.5",
-  "updated": "2026-06-11",
-  "notes": "Auto-update after payload change (4f44c982e9451eaf7065ac630c5702ae27fe8951)",
+  "version": "1.0.6",
+  "updated": "2026-11-24",
+  "notes": "Auto-update after payload change (5ace228da33aeee64ceaf64846e956b3b8393888)",
   "payload": {
     "description": "Efficiency baseline script, pinned to commit",
-    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/4f44c982e9451eaf7065ac630c5702ae27fe8951/payload/Invoke-EfficiencyBaseline.ps1",
-    "sha256": "f6d391d4fff1419178050c2e46ec35f19b95e130e104ef141c6b6fe9815d7652"
+    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/5ace228da33aeee64ceaf64846e956b3b8393888/payload/Invoke-EfficiencyBaseline.ps1",
+    "sha256": "12db3740bf20b78b47002fd679f7f634a943ab1513708215a7142e7dd9ac9c62"
   },
   "config": {
     "description": "Payload toggles + appx removal list, pinned to commit",
-    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/4f44c982e9451eaf7065ac630c5702ae27fe8951/payload/efficiency-config.json",
-    "sha256": "4fe6b0bd3699031b606892644b2566042120b090934305058ef6564589d0190e"
+    "url": "https://raw.githubusercontent.com/Cylon-Consulting/endpoint-baseline/5ace228da33aeee64ceaf64846e956b3b8393888/payload/efficiency-config.json",
+    "sha256": "022a67154f5fe89373d26cc3ae39516ddcb58b843c98e55912f830ac85bf844e"
   },
   "arguments": "-ConfigPath {config}"
 }
