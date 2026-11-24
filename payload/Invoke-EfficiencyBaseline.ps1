@@ -133,13 +133,24 @@ if ($cfg.telemetryMachine) {
 }
 if ($cfg.activityHistory) {
     Invoke-Step 'Activity history off' {
-        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System' EnableActivityFeed 0
+        # EnableActivityFeed stays 1: setting it to 0 also disables Win+V
+        # clipboard history on affected builds (WinUtil PR #5035). Writing 1
+        # repairs machines that received 0 from payload v1.0.5 and earlier.
+        # Publish/Upload = 0 still stop activities leaving the device.
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System' EnableActivityFeed 1
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System' UploadUserActivities 0
     }
 }
 if ($cfg.consumerFeatures) {
     Invoke-Step 'Consumer features off (no auto-installed promo apps)' {
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent' DisableWindowsConsumerFeatures 1
+    }
+}
+if ($cfg.preventDeviceCompanionApps) {
+    # Stops Windows pulling vendor companion apps (monitor/dock/printer
+    # utilities) from device metadata when hardware is plugged in.
+    Invoke-Step 'Device companion-app auto-install off (policy)' {
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata' PreventDeviceMetadataFromNetwork 1
     }
 }
 if ($cfg.wpbt) {
@@ -220,6 +231,27 @@ if ($cfg.edgeBackgroundOff) {
     # Edge keeps processes alive after the browser is closed unless told not to.
     Invoke-Step 'Edge background mode off (policy)' {
         Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Edge' BackgroundModeEnabled 0
+    }
+}
+if ($cfg.edgePromotionsOff) {
+    # Promotional surfaces only. New-tab layout, first-run and default-browser
+    # behaviour are deliberately left alone - users would notice those.
+    Invoke-Step 'Edge promotions off (policy)' {
+        $edge = 'HKLM:\SOFTWARE\Policies\Microsoft\Edge'
+        Set-Reg $edge ShowRecommendationsEnabled 0
+        Set-Reg $edge EdgeShoppingAssistantEnabled 0
+        Set-Reg $edge ShowMicrosoftRewards 0
+        Set-Reg $edge DefaultBrowserSettingsCampaignEnabled 0
+        Set-Reg $edge SpotlightExperiencesAndRecommendationsEnabled 0
+        Set-Reg $edge UserFeedbackAllowed 0
+        Set-Reg $edge WalletDonationEnabled 0
+        Set-Reg $edge ShowAcrobatSubscriptionButton 0
+    }
+}
+if ($cfg.startMenuRecommendationsOff) {
+    # Machine half of the toggle; the per-user half is applied below.
+    Invoke-Step 'Start menu suggested websites off (policy)' {
+        Set-Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer' HideRecommendedPersonalizedSites 1
     }
 }
 if ($cfg.disableFastStartup) {

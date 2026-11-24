@@ -3,7 +3,9 @@
 Every setting changed by `Invoke-EfficiencyBaseline.ps1` with the current
 `efficiency-config.json`, and the reason for each. Config toggle names in
 parentheses. Derived from WinUtil release 26.05.12 (business-trimmed) plus
-researched additions; see git history for change control.
+researched additions; last reviewed against WinUtil 26.11.13 and Win11Debloat
+on 2026-11-24 (`reviews/2026-11-24-upstream-review.md`). See git history for
+change control.
 
 ## Safety (runs first)
 
@@ -16,8 +18,9 @@ researched additions; see git history for change control.
 | Change | Technical detail | Reason |
 |---|---|---|
 | Telemetry to minimum (`telemetryMachine`) | `Policies\DataCollection → AllowTelemetry=0` | Cuts diagnostic uploads (~6MB/day/machine) to required-only |
-| Activity history off (`activityHistory`, `telemetryMachine`) | `Policies\System → EnableActivityFeed=0, UploadUserActivities=0, PublishUserActivities=0` | Stops timeline collection and upload of user activity |
+| Activity history off (`activityHistory`, `telemetryMachine`) | `Policies\System → UploadUserActivities=0, PublishUserActivities=0, EnableActivityFeed=1` | Stops user activity being published or uploaded. `EnableActivityFeed` is held at 1 because upstream reports that 0 also disables Win+V clipboard history on affected builds (WinUtil PR #5035; not reproduced in our own test); writing 1 resets machines that got 0 from v1.0.5 and earlier |
 | Consumer features off (`consumerFeatures`) | `CloudContent → DisableWindowsConsumerFeatures=1` | Stops Windows auto-installing promoted apps — prevents future bloat |
+| Device companion apps off (`preventDeviceCompanionApps`) | `Policies\Device Metadata → PreventDeviceMetadataFromNetwork=1` | Stops Windows auto-installing vendor apps when a monitor, dock or printer is plugged in. Side effect: wanted vendor utilities no longer arrive on their own either |
 | WPBT execution off (`wpbt`) | `Session Manager → DisableWpbtExecution=1` | Blocks vendor firmware from injecting software at boot |
 | PowerShell 7 telemetry off (`powershell7Telemetry`) | Machine env var `POWERSHELL_TELEMETRY_OPTOUT=1` | Stops pwsh usage telemetry |
 | Widgets/news feed off (`disableWidgets`) | `Policies\Dsh → AllowNewsAndInterests=0` | Kills the persistent `webexperience` background process and its content pulls |
@@ -28,6 +31,8 @@ researched additions; see git history for change control.
 | Recall off (`disableRecall`) | `Policies\WindowsAI → DisableAIDataAnalysis=1` | Stops continuous screen-snapshotting on Copilot+ hardware; privacy |
 | Game DVR off (`disableGameDVR`) | `Policies\GameDVR → AllowGameDVR=0` | Disables Xbox background screen-recording — unused on business machines |
 | Edge background mode off (`edgeBackgroundOff`) | `Policies\Edge → BackgroundModeEnabled=0` | Edge no longer keeps processes resident after being closed |
+| Edge promotions off (`edgePromotionsOff`) | `Policies\Edge → ShowRecommendationsEnabled=0, EdgeShoppingAssistantEnabled=0, ShowMicrosoftRewards=0, DefaultBrowserSettingsCampaignEnabled=0, SpotlightExperiencesAndRecommendationsEnabled=0, UserFeedbackAllowed=0, WalletDonationEnabled=0, ShowAcrobatSubscriptionButton=0` | Removes Edge's promotional prompts and their background content pulls. New-tab layout, first-run and default-browser behaviour are untouched |
+| Start menu suggested websites off (`startMenuRecommendationsOff`) | `Policies\Windows\Explorer → HideRecommendedPersonalizedSites=1` | Machine half of the Start recommendations toggle — no website suggestions in Start |
 | Fast startup off (`disableFastStartup`) | `Session Manager\Power → HiberbootEnabled=0` | Every shutdown is a true reset — prevents accumulated slow-state; "I restarted it" actually means restarted. Cold boots a few seconds slower |
 
 ## Per-user — applied to every existing profile + Default User template
@@ -72,6 +77,8 @@ users even when run as SYSTEM through RMM.
 - **Windows Copilot** — left enabled (`disableCopilot: false`); some users actively use it. Note: Recall is still disabled — separate feature, no workflow depends on it. Microsoft 365 Copilot (Office) was never affected by these policies either way
 - **Windows Error Reporting** — diagnostic value when investigating user issues; zero idle cost
 - **Location services** — uniform desktop/laptop payload; auto-timezone for field laptops
+- **Delivery Optimization** — WinUtil's Standard preset now disables it (`DODownloadMode=0`); left at the Windows default so machines on the same LAN keep sharing update downloads instead of each pulling over the WAN
+- **Windows Update driver delivery, toast notifications** — offered upstream (Win11Debloat); the fleet relies on both
 - **Business apps** — Teams, Outlook, Quick Assist, Sticky Notes, Paint, To Do, Power Automate, Alarms, Sound Recorder, OneDrive
 - **Windows Search indexing** — removal creates slow-search complaints
 - **Edge startup boost** — helps users whose main browser is Edge

@@ -5,21 +5,21 @@
       "repo": "Raphire/Win11Debloat",
       "branch": "master",
       "path": "Config/Apps.json",
-      "lastReviewed": "db2486505167e6295dd198e0f5039b28948e077d"
+      "lastReviewed": "3ecb01efa057078ca022de7d370109eb1839f982"
     },
     {
       "name": "Win11Debloat registry tweaks",
       "repo": "Raphire/Win11Debloat",
       "branch": "master",
       "path": "Regfiles",
-      "lastReviewed": "1d828d6a78a4a046c09a1d36db84fb547dc4e5bf"
+      "lastReviewed": "0801d25463cf59ebe3da579c7aafa789155a6f0f"
     },
     {
       "name": "Win11Debloat recommended defaults",
       "repo": "Raphire/Win11Debloat",
       "branch": "master",
       "path": "Config/DefaultSettings.json",
-      "lastReviewed": "bb31e98df773157a60957d70c1e8d30404f4f0ad"
+      "lastReviewed": "0eec316edb2a7aa0c0a53dc19fc5fa507ba103ae"
     },
     {
       "name": "Microsoft VDOT optimization tool",

@@ -35,7 +35,7 @@ Desktops
 | Layer | Question | Source compared |
 |---|---|---|
 | Membership | Did Standard's tweak ID list change? | upstream `preset.json` vs `approvedPreset` |
-| Definition | Did an approved tweak's body change (registry/services/scripts)? | per-tweak SHA256 of canonicalized `tweaks.json` entry vs `tweakHashes` |
+| Definition | Did an approved tweak's body change (registry/services/scripts)? | per-tweak SHA256 of canonicalized `tweaks.json` entry (minus docs-only `link` / `Description`) vs `tweakHashes` |
 | Existence | Was an approved tweak deleted upstream? | approved ID missing from `tweaks.json` |
 | FYI | New Essential Tweaks we never reviewed | category scan, never triggers alert |
 

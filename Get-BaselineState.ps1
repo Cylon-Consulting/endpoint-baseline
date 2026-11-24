@@ -38,10 +38,11 @@ if (-not $OutFile) {
 $machineChecks = @(
     @{Area='Machine'; Label='Telemetry level';            Path='HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection'; Name='AllowTelemetry'; Expected=0}
     @{Area='Machine'; Label='Publish user activities';    Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'; Name='PublishUserActivities'; Expected=0}
-    @{Area='Machine'; Label='Activity feed';              Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'; Name='EnableActivityFeed'; Expected=0}
+    @{Area='Machine'; Label='Activity feed (1 keeps Win+V)'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'; Name='EnableActivityFeed'; Expected=1}
     @{Area='Machine'; Label='Upload user activities';     Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'; Name='UploadUserActivities'; Expected=0}
     @{Area='Machine'; Label='Consumer features';          Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent'; Name='DisableWindowsConsumerFeatures'; Expected=1}
-    @{Area='Machine'; Label='WPBT execution';             Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager'; Name='DisableWpbtExecution'; Expected=1}
+    @{Area='Machine'; Label='Device companion apps';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata'; Name='PreventDeviceMetadataFromNetwork'; Expected=1}
+    @{Area='Machine'; Label='WPBT execution';            Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager'; Name='DisableWpbtExecution'; Expected=1}
     @{Area='Machine'; Label='Widgets / news feed';        Path='HKLM:\SOFTWARE\Policies\Microsoft\Dsh'; Name='AllowNewsAndInterests'; Expected=0}
     @{Area='Machine'; Label='News feed Win10 (EnableFeeds)'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds'; Name='EnableFeeds'; Expected=0}
     @{Area='Machine'; Label='Storage Sense allowed';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\StorageSense'; Name='AllowStorageSenseGlobal'; Expected=1}
@@ -53,7 +54,16 @@ $machineChecks = @(
     @{Area='Machine'; Label='Recall / AI data analysis';  Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI'; Name='DisableAIDataAnalysis'; Expected=1}
     @{Area='Machine'; Label='Game DVR policy';            Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR'; Name='AllowGameDVR'; Expected=0}
     @{Area='Machine'; Label='Edge background mode';       Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='BackgroundModeEnabled'; Expected=0}
-    @{Area='Machine'; Label='Fast startup (hiberboot)';   Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power'; Name='HiberbootEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge recommendations';       Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='ShowRecommendationsEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge shopping assistant';    Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='EdgeShoppingAssistantEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge Rewards';               Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='ShowMicrosoftRewards'; Expected=0}
+    @{Area='Machine'; Label='Edge default-browser campaigns'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='DefaultBrowserSettingsCampaignEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge Spotlight recommendations'; Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='SpotlightExperiencesAndRecommendationsEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge feedback prompts';      Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='UserFeedbackAllowed'; Expected=0}
+    @{Area='Machine'; Label='Edge wallet donation';       Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='WalletDonationEnabled'; Expected=0}
+    @{Area='Machine'; Label='Edge Acrobat button';        Path='HKLM:\SOFTWARE\Policies\Microsoft\Edge'; Name='ShowAcrobatSubscriptionButton'; Expected=0}
+    @{Area='Machine'; Label='Start suggested websites';   Path='HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer'; Name='HideRecommendedPersonalizedSites'; Expected=1}
+    @{Area='Machine'; Label='Fast startup (hiberboot)';  Path='HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power'; Name='HiberbootEnabled'; Expected=0}
     @{Area='Machine'; Label='svchost split threshold';    Path='HKLM:\SYSTEM\CurrentControlSet\Control'; Name='SvcHostSplitThresholdInKB'; Expected=[uint32]((Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum / 1KB)}
 )
 

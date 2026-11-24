@@ -170,9 +170,14 @@ try {
     $upstreamPreset = @($preset.$PresetName)
     if (-not $upstreamPreset) { throw "Preset '$PresetName' not found in upstream preset.json" }
 
+    # Docs-only fields are left out of the hash: upstream rewrites them
+    # (e.g. the 2026 docs URL move touched every tweak) without changing
+    # what a tweak does, which would otherwise flag every tweak as changed.
+    $hashExclude = @('link', 'Description')
     $upstreamHashes = @{}
     foreach ($p in $tweaks.PSObject.Properties) {
-        $upstreamHashes[$p.Name] = Get-Sha256Hex (ConvertTo-CanonicalJson $p.Value)
+        $body = $p.Value | Select-Object -Property * -ExcludeProperty $hashExclude
+        $upstreamHashes[$p.Name] = Get-Sha256Hex (ConvertTo-CanonicalJson $body)
     }
 } catch {
     Write-Error "Failed to fetch/parse upstream config: $_"

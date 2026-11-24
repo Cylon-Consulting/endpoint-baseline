@@ -6,6 +6,7 @@
   "svchostConsolidation": true,
   "activityHistory": true,
   "consumerFeatures": true,
+  "preventDeviceCompanionApps": true,
   "wpbt": true,
   "powershell7Telemetry": true,
   "disableWidgets": true,
@@ -20,6 +21,7 @@
   "disableRecall": true,
   "disableGameDVR": true,
   "edgeBackgroundOff": true,
+  "edgePromotionsOff": true,
   "startMenuRecommendationsOff": true,
   "disableFastStartup": true,
   "removeAppx": [
